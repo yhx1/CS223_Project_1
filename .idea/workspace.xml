@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="" />
+    <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Metric.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresDataLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresTransactionTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TestPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/TestPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/Project_1.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TestPostgreSQL.class" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="random" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -16,7 +32,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Project_1" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -26,10 +42,19 @@
     </option>
   </component>
   <component name="ProjectId" id="1XS9891nfwW6gQQ70KaCtmjfT5K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="cs223" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -43,17 +68,94 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="TestPostgreSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TestPostgreSQL" />
+  <component name="RunManager" selected="JUnit.TestDataLoaderPostgres.testPostgresBenchmark">
+    <configuration name="TestDataLoaderPostgres.testCreateSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="METHOD_NAME" value="testCreateSchema" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataLoaderPostgres.testDropSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="METHOD_NAME" value="testDropSchema" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataLoaderPostgres.testLoadMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="METHOD_NAME" value="testLoadMetadata" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataLoaderPostgres.testPostgresBenchmark" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="METHOD_NAME" value="testPostgresBenchmark" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataLoaderPostgres.testPreprocessInserts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="METHOD_NAME" value="testPreprocessInserts" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestPostgreSQL" />
+        <item itemvalue="JUnit.TestDataLoaderPostgres.testPostgresBenchmark" />
+        <item itemvalue="JUnit.TestDataLoaderPostgres.testPreprocessInserts" />
+        <item itemvalue="JUnit.TestDataLoaderPostgres.testLoadMetadata" />
+        <item itemvalue="JUnit.TestDataLoaderPostgres.testCreateSchema" />
+        <item itemvalue="JUnit.TestDataLoaderPostgres.testDropSchema" />
       </list>
     </recent_temporary>
   </component>
@@ -69,5 +171,23 @@
       <updated>1581028466057</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Project_1" />
+    </ignored-roots>
   </component>
 </project>
