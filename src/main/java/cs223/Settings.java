@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 public class Settings {
 
-    public static int MPL = 6;
+    public static int MPL = 20;
 
     public static int TIME_UNIT_SECS = 1440;
 

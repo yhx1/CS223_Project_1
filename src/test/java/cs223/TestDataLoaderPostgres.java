@@ -8,7 +8,6 @@ import java.util.TreeMap;
 
 public class TestDataLoaderPostgres {
 
-    @Test
     public void testCreateSchema() {
         try{
             PostgresDataLoader.RunSQLByFile("Resources/schema/create.sql");
@@ -18,7 +17,6 @@ public class TestDataLoaderPostgres {
         }
     }
 
-    @Test
     public void testDropSchema() {
         try{
             PostgresDataLoader.RunSQLByLine("Resources/schema/drop.sql");
@@ -28,7 +26,6 @@ public class TestDataLoaderPostgres {
         }
     }
 
-    @Test
     public void testLoadMetadata() {
         try{
             PostgresDataLoader.RunSQLByLine("Resources/data/high_concurrency/metadata.sql");
@@ -76,13 +73,8 @@ public class TestDataLoaderPostgres {
                     "Resources/data/low_concurrency/semantic_observation_low_concurrency.sql"
             );
 
-            //PostgresBenchmark.statements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
-            //PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/observation_low_concurrency.sql");
-            //PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/semantic_observation_low_concurrency.sql");
-            //Metric metric = PostgresBenchmark.runPostgresBenchmark();
             Metric metric = pb.runPostgresBenchmark();
 
-            //metric.printMetrics();
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

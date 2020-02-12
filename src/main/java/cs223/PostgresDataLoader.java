@@ -136,14 +136,6 @@ public class PostgresDataLoader {
 
         TreeMap<Integer, HashMap<String, ArrayList<String>>> cachedStatements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
 
-        /*
-        for (int i = 0; i < 1728000 / Settings.TIME_UNIT_SECS; i++) {
-            String path = Settings.PREPROCESSED_DATA_URL + i;
-            File file = new File(path);
-            file.mkdir();
-        }
-         */
-
         BufferedReader reader;
         reader = new BufferedReader(new FileReader(filename));
 
@@ -269,29 +261,6 @@ public class PostgresDataLoader {
                     oos.close();
                     fos.close();
 
-                    /*
-
-                    Iterator<String> currentInsertsIterator = currentStatements.keySet().iterator();
-
-                    while (currentInsertsIterator.hasNext()) {
-                        String tempSensorID = currentInsertsIterator.next();
-                        List<String> statementsList = currentStatements.get(tempSensorID);
-
-                        String folderPath = Settings.PREPROCESSED_DATA_URL + time + "/";
-                        File currentFile = new File(folderPath + tempSensorID);
-                        if (!currentFile.exists()) {
-                            if (!currentFile.createNewFile()){
-                                throw new IOException("Cannot create file");
-                            }
-                        }
-                        BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath + "/" + tempSensorID, true));
-                        for (int i = 0; i < statementsList.size(); i++) {
-                            writer.append(statementsList.get(i)+"\n");
-                        }
-                        writer.close();
-                    }
-
-                    */
                 }
 
                 cachedStatements.clear();

@@ -30,7 +30,6 @@ public class PostgresTransactionTask implements Runnable {
         long operationDelayMillis = 0;
 
         try {
-            //long transactionStartTime = System.currentTimeMillis();
             Connection con = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
             con.setTransactionIsolation(Settings.ISOLATION_LEVEL);
 
