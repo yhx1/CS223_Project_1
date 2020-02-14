@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mysql/schema/create_mysql.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysql/schema/drop_mysql.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLDataLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLTransactionTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderMySQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,14 +43,24 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Resources/schema" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Noname\Desktop\CS223\Project_1\mysql\schema" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="cs223" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cs223" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Noname\Desktop\CS223\Project_1\Resources\schema" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -59,7 +76,7 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.TestDataLoaderPostgres.testPostgresBenchmark">
-    <configuration name="TestDataLoaderPostgres.testCreateSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDataLoaderMySQL.testCreateSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_1" />
       <extension name="coverage">
         <pattern>
@@ -68,14 +85,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderMySQL" />
       <option name="METHOD_NAME" value="testCreateSchema" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDataLoaderPostgres.testDropSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDataLoaderMySQL.testDropSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_1" />
       <extension name="coverage">
         <pattern>
@@ -84,14 +101,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderMySQL" />
       <option name="METHOD_NAME" value="testDropSchema" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDataLoaderPostgres.testLoadMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDataLoaderMySQL.testLoadMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_1" />
       <extension name="coverage">
         <pattern>
@@ -100,8 +117,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderMySQL" />
       <option name="METHOD_NAME" value="testLoadMetadata" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataLoaderMySQL.testMySQLBenchmark" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs223" />
+      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderMySQL" />
+      <option name="METHOD_NAME" value="testMySQLBenchmark" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -123,29 +156,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDataLoaderPostgres.testPreprocessInserts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Project_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs223.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
-      <option name="METHOD_NAME" value="testPreprocessInserts" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestDataLoaderPostgres.testPostgresBenchmark" />
-        <item itemvalue="JUnit.TestDataLoaderPostgres.testPreprocessInserts" />
-        <item itemvalue="JUnit.TestDataLoaderPostgres.testLoadMetadata" />
-        <item itemvalue="JUnit.TestDataLoaderPostgres.testCreateSchema" />
-        <item itemvalue="JUnit.TestDataLoaderPostgres.testDropSchema" />
+        <item itemvalue="JUnit.TestDataLoaderMySQL.testMySQLBenchmark" />
+        <item itemvalue="JUnit.TestDataLoaderMySQL.testLoadMetadata" />
+        <item itemvalue="JUnit.TestDataLoaderMySQL.testCreateSchema" />
+        <item itemvalue="JUnit.TestDataLoaderMySQL.testDropSchema" />
       </list>
     </recent_temporary>
   </component>
