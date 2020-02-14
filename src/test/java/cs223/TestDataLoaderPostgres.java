@@ -49,7 +49,7 @@ public class TestDataLoaderPostgres {
             PostgresDataLoader.ParseTimestamp("2017-11-08 00:00:00");
             PostgresDataLoader.ParseTimestamp("2017-11-27 23:57:59");
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
             Assert.fail();
         }
     }
