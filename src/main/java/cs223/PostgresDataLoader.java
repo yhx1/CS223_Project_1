@@ -134,6 +134,9 @@ public class PostgresDataLoader {
 
     public static void PreprocessInserts(String filename) throws Exception {
 
+        String preprocessLoc = Settings.PREPROCESSED_DATA_URL;
+        boolean garbage = new File(preprocessLoc).mkdir();
+
         TreeMap<Integer, HashMap<String, ArrayList<String>>> cachedStatements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
 
         BufferedReader reader;
@@ -301,10 +304,6 @@ public class PostgresDataLoader {
 
     }
 
-    public static void loadQueries(String filename) {
 
-
-
-    }
 
 }

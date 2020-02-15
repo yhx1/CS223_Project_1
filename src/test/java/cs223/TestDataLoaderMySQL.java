@@ -1,5 +1,6 @@
 package cs223;
 
+import com.mysql.cj.exceptions.CJCommunicationsException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,24 +43,9 @@ public class TestDataLoaderMySQL {
     }
 
     @Test
-    public void testPreprocessInserts() {
+    public void testMySQLBenchmark() throws CJCommunicationsException {
         try{
-            PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/semantic_observation_high_concurrency.sql");
-            PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/observation_high_concurrency.sql");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void testMySQLBenchmark() {
-        try{
-            MySQLBenchmark mb = new MySQLBenchmark(
-                    "Resources/data/low_concurrency/observation_low_concurrency.sql",
-                    "Resources/data/low_concurrency/semantic_observation_low_concurrency.sql"
-            );
+            MySQLBenchmark mb = new MySQLBenchmark();
 
             Metric metric = mb.runMySQLBenchmark();
 

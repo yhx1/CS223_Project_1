@@ -1,9 +1,6 @@
 package cs223;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -29,8 +26,10 @@ public class PostgresTransactionTask implements Runnable {
         long transactionTimeMillis = 0;
         long operationDelayMillis = 0;
 
+        Connection con = null;
+        Statement st = null;
         try {
-            Connection con = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
+            con = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
             con.setTransactionIsolation(Settings.ISOLATION_LEVEL);
 
             // For Queries
@@ -38,14 +37,14 @@ public class PostgresTransactionTask implements Runnable {
                 con.setReadOnly(readonly);
                 for (int i = 0; i < statements.size(); i++) {
                     long operationStartTime = System.currentTimeMillis();
-                    Statement st = con.createStatement();
+                    st = con.createStatement();
                     ResultSet rs = st.executeQuery(statements.get(i));
                     rs.close();
                     st.close();
                     long operationEndTime = System.currentTimeMillis();
                     operationDelayMillis += (operationEndTime - operationStartTime);
                 }
-                con.close();
+                //con.close();
                 long transactionEndTime = System.currentTimeMillis();
                 transactionTimeMillis = transactionEndTime-taskStartTimeMillis;
             }
@@ -54,7 +53,7 @@ public class PostgresTransactionTask implements Runnable {
                 con.setAutoCommit(false);
                 for (int i=0; i < statements.size(); i++) {
                     long operationStartTime = System.currentTimeMillis();
-                    Statement st = con.createStatement();
+                    st = con.createStatement();
                     int rs = st.executeUpdate(statements.get(i));
                     st.close();
                     long operationEndTime = System.currentTimeMillis();
@@ -62,7 +61,7 @@ public class PostgresTransactionTask implements Runnable {
                 }
 
                 con.commit();
-                con.close();
+                //con.close();
                 long transactionEndTime = System.currentTimeMillis();
                 transactionTimeMillis = transactionEndTime - taskStartTimeMillis;
             }
@@ -70,6 +69,15 @@ public class PostgresTransactionTask implements Runnable {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (!st.isClosed()) {
+                    st.close();
+                }
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Failure to close connection.");
+            }
         }
 
         // Update all metrics in critical section
@@ -81,7 +89,7 @@ public class PostgresTransactionTask implements Runnable {
             metric.OPERATION_TIME_ELAPSED += operationDelayMillis;
 
             if (readonly) {
-                metric.NUM_QUERIES = statements.size();
+                metric.NUM_QUERIES += statements.size();
                 metric.QUERY_TIME_ELAPSED += operationDelayMillis;
             }
             metric.semaphore.release();

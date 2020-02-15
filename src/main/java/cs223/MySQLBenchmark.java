@@ -17,18 +17,72 @@ public class MySQLBenchmark {
 
     public static TreeMap<Integer, HashMap<String, ArrayList<String>>> queryStatements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
 
-    public String observationURL, semanticURL;
-
-    public MySQLBenchmark(String observationURL, String semanticURL) {
-        this.observationURL = observationURL;
-        this.semanticURL = semanticURL;
+    public MySQLBenchmark() {
     }
 
     public void convertQueriesToMySQL() {
 
         for (int time = 0; time < 0.5 * 1728000 / Settings.TIME_UNIT_SECS; time++) {
-            
+
+            ArrayList<String> currentQueries = queryStatements.get(time).get("Query");
+
+            for (int i = 0 ; i < currentQueries.size(); i++) {
+
+                {
+                    String replaced = "date_trunc('day', ";
+                    String alternativePart1 = "DATE_FORMAT(";
+                    String alternativePart2 = ", '%Y-%m-%d 00:00:00')";
+                    String query = currentQueries.get(i);
+
+                    int idx;
+                    while ((idx = query.indexOf(replaced)) != -1) {
+                        StringBuffer sb = new StringBuffer(query);
+                        sb.replace(idx, idx + replaced.length(), alternativePart1);
+                        int j = idx;
+                        while (sb.charAt(j) != ')') {
+                            j++;
+                        }
+                        if (j >= sb.length()) {
+                            break;
+                        }
+                        sb.replace(j, j + 1, alternativePart2);
+
+                        query = sb.toString();
+                    }
+
+                    currentQueries.set(i, query);
+                }
+
+                {
+                    String replaced = "=ANY(array[";
+                    String alternativePart1 = " IN (";
+
+                    String query = currentQueries.get(i);
+
+                    int idx;
+                    while ((idx = query.indexOf(replaced)) != -1) {
+                        StringBuffer sb = new StringBuffer(query);
+                        sb.replace(idx, idx + replaced.length(), alternativePart1);
+                        int j = idx;
+                        while (sb.charAt(j) != ']') {
+                            j++;
+                        }
+                        if (j >= sb.length()) {
+                            break;
+                        }
+                        sb.replace(j, j + 1, "");
+
+                        query = sb.toString();
+                    }
+
+                    currentQueries.set(i, query);
+                }
+
+            }
+
         }
+
+        System.out.println("Converted to MySQL compatible queries.");
 
     }
 
@@ -81,7 +135,17 @@ public class MySQLBenchmark {
                     MySQLTransactionTask task = new MySQLTransactionTask(temp, metric, true, taskStartTime);
                     executor.execute(task);
                 }
-            } else {
+            }
+            else if (Settings.DO_NOT_GROUP_DATA_OPERATIONS) {
+                for (int j = 0; j < currentStatements.get(sensorID).size(); j++) {
+                    taskStartTime = System.currentTimeMillis();
+                    ArrayList temp = new ArrayList<String>();
+                    temp.add(currentStatements.get(sensorID).get(j));
+                    MySQLTransactionTask task = new MySQLTransactionTask(temp, metric, false, taskStartTime);
+                    executor.execute(task);
+                }
+            }
+            else {
                 taskStartTime = System.currentTimeMillis();
                 MySQLTransactionTask task = new MySQLTransactionTask(currentStatements.get(sensorID), metric, false, taskStartTime);
                 executor.execute(task);
@@ -92,7 +156,8 @@ public class MySQLBenchmark {
 
     public Metric runMySQLBenchmark() throws Exception {
 
-
+        queryStatements = QueryParser.parseTime("Resources/queries/high_concurrency/queries.txt");
+        convertQueriesToMySQL();
 
         Metric metric = new Metric();
 

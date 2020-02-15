@@ -3,21 +3,15 @@ package cs223;
 import java.io.*;
 import java.util.*;
 import java.text.*;
-
-
+import java.lang.*;
 
 
 class QueryParser
 {
-    static class Composite
+    static TreeMap<Integer, HashMap<String, ArrayList<String>>> parseTime(String fileName) throws Exception
     {
-        Long time;
-        String query;
-    }
+        TreeMap<Integer, HashMap<String, ArrayList<String>>> queryStatementsWithTime = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
 
-    static ArrayList<Composite> parseTime(String fileName) throws Exception
-    {
-        ArrayList<Composite> times = new ArrayList<Composite>();
         FileReader input = null;
         input = new FileReader(fileName);
         BufferedReader bufRead = new BufferedReader(input);
@@ -33,35 +27,56 @@ class QueryParser
                 String newTime = timeSplit[0]+" "+timeSplit[1];
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date reference0 = dateFormat.parse("2017-11-08 01:23:00");
+                Date reference0 = dateFormat.parse("2017-11-08 00:00:00");
 
                 Date time = dateFormat.parse(newTime);
-                Long seconds = (time.getTime() - reference0.getTime());
-                //System.out.println(query); 
+                Integer seconds = (int)((time.getTime() - reference0.getTime())/(1440*1000));
 
-                Composite current = new Composite();
-                current.query = query;
-                current.time = seconds;
-                times.add(current);
+                //System.out.println(query);
+                if (query != null)
+                {
+                    query = query.trim();
+                    if (queryStatementsWithTime.containsKey(seconds))
+                    {
+                        queryStatementsWithTime.get(seconds).get("Query").add(query+";");
+                    }
+                    else
+                    {
+                        HashMap<String, ArrayList<String>> queryStatements = new HashMap<String, ArrayList<String>>();
+                        ArrayList<String> newList = new ArrayList<String>();
+                        newList.add(query+";");
+                        queryStatements.put("Query", newList);
+                        queryStatementsWithTime.put(seconds, queryStatements);
+                    }
+                }
                 query = "";
             }
             else
             {
-                query+=myLine;
-                query+=" ";
+                if (myLine.equals("\"") == false)
+                {
+                    query+=myLine.trim();
+                    query+=" ";
+                }
             }
 
         }
-/*
-        for (Composite each : times) { 		      
-            System.out.println(each.time.toString()+ each.query); 		
-       }
-*/
-        return times;
+
+        return queryStatementsWithTime;
     }
 
     public static void main(String[] args) throws Exception
     {
-        parseTime(args[0]);
+        /*
+        TreeMap<Integer, HashMap<String, ArrayList<String>>> test = parseTime("Resources/queries/high_concurrency/queries.txt");
+        Iterator testIterator = test.entrySet().iterator();
+
+        // Iterate through the hashmap
+        while (testIterator.hasNext()) {
+            Map.Entry mapElement = (Map.Entry)testIterator.next();
+            System.out.println(mapElement.getKey());
+            System.out.println(mapElement.getValue());
+        }
+        */
     }
 }

@@ -12,11 +12,7 @@ public class PostgresBenchmark {
 
     public static TreeMap<Integer, HashMap<String, ArrayList<String>>> queryStatements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
 
-    public String observationURL, semanticURL;
-
-    public PostgresBenchmark(String observationURL, String semanticURL) {
-        this.observationURL = observationURL;
-        this.semanticURL = semanticURL;
+    public PostgresBenchmark() {
     }
 
     public void runPostgresBenchmarkOnTick(ThreadPoolExecutor executor, int time, Metric metric) throws Exception {
@@ -26,6 +22,7 @@ public class PostgresBenchmark {
         HashMap<String, ArrayList<String>> currentStatements;
         if (queryStatements.containsKey(time)) {
             currentStatements = queryStatements.get(time);
+
         } else {
             currentStatements = new HashMap<String, ArrayList<String>>();
         }
@@ -67,7 +64,17 @@ public class PostgresBenchmark {
                     PostgresTransactionTask task = new PostgresTransactionTask(temp, metric, true, taskStartTime);
                     executor.execute(task);
                 }
-            } else {
+            }
+            else if (Settings.DO_NOT_GROUP_DATA_OPERATIONS) {
+                for (int j = 0; j < currentStatements.get(sensorID).size(); j++) {
+                    taskStartTime = System.currentTimeMillis();
+                    ArrayList temp = new ArrayList<String>();
+                    temp.add(currentStatements.get(sensorID).get(j));
+                    PostgresTransactionTask task = new PostgresTransactionTask(temp, metric, false, taskStartTime);
+                    executor.execute(task);
+                }
+            }
+            else {
                 taskStartTime = System.currentTimeMillis();
                 PostgresTransactionTask task = new PostgresTransactionTask(currentStatements.get(sensorID), metric, false, taskStartTime);
                 executor.execute(task);
@@ -77,6 +84,8 @@ public class PostgresBenchmark {
     }
 
     public Metric runPostgresBenchmark() throws Exception {
+
+        queryStatements = QueryParser.parseTime("Resources/queries/high_concurrency/queries.txt");
 
         Metric metric = new Metric();
 

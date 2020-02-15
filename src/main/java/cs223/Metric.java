@@ -23,14 +23,15 @@ public class Metric {
     }
 
     public void printMetrics(int second) {
+        System.out.println("Time Elapsed: " + second + "s");
         if (NUM_TRANSACTIONS != 0) {
-            System.out.println("#Transactions: " + NUM_TRANSACTIONS + " #Average: " + (TRANSACTION_TIME_ELAPSED/NUM_TRANSACTIONS) + " Throughput: " + ((float)NUM_TRANSACTIONS/second));
+            System.out.println("#Transactions: " + NUM_TRANSACTIONS + " #Average Delay: " + (TRANSACTION_TIME_ELAPSED/NUM_TRANSACTIONS) + "ms Throughput: " + ((float)NUM_TRANSACTIONS/second) + " trx/s");
         }
         if (NUM_OPERATIONS != 0) {
-            System.out.println("#Operations: " + NUM_OPERATIONS + " #Average: " + (OPERATION_TIME_ELAPSED * 1000/NUM_OPERATIONS));
+            System.out.println("#Operations: " + NUM_OPERATIONS + " #Average Operation Response Time: " + (OPERATION_TIME_ELAPSED * 1000/NUM_OPERATIONS) + "ns");
         }
         if (NUM_QUERIES != 0) {
-            System.out.println("#Queries: " + NUM_QUERIES + " #Average: " + (QUERY_TIME_ELAPSED/NUM_QUERIES));
+            System.out.println("#Queries: " + NUM_QUERIES + " #Average Operation Response Time: " + (QUERY_TIME_ELAPSED * 1000/NUM_QUERIES) + "ns");
         }
     }
 }

@@ -1,0 +1,64 @@
+UCI CS223 Winter 2020 Project 1
+
+Author:
+- Yiheng Xu (yihengx1@uci.edu)
+- Qingchuan Yang (qingchy@uci.edu)
+
+This project is written, tested and run with IntelliJ IDEA Community Edition. All the environments/required softwares
+are installed on a Windows machine.
+You may try other ways to compile, test and run this program, but only methods using IDEA on Windows is given here.
+
+Requirements:
+- Install PostgreSQL for Windows.
+    - Port should be set as 5432.
+    - Create a database called "testdb" with all privileges granted to user "postgres" with password "cs223papostgres".
+
+- Install MySQL for Windows.
+    - Post should be set as 3306.
+    - Create a database called "testdb" with all privileges granted to user "cs223p1" with password "cs223p1".
+
+- Import the project as a Maven project in IntelliJ IDEA.
+- Install Java JDK with version >= 8.
+
+Optional Requirements:
+- Increase JVM maximum heap size to at least 10GB
+    - In Windows, create an environment variable named "_JAVA_OPTIONS", with value "-Xmx10g".
+    - At least 10GB is required to complete running the high concurrency dataset.
+        - By default we only run half of the dataset. If you wish to run the entire dataset you can edit the code in PostgresBenchmark&MySQLBenchmark class.
+        - High memory usage comes from not enough throughput causing all incoming transactions to be placed on a queue.
+        - Note that Observation can still be done without running the entire dataset.
+
+- Increase maximum user ports of Windows OS
+    - This is required if you run with each INSERT as a transaction, and when your machine allows high throughput.
+    - Windows OS by default limits the number of TIMED_WAIT ports to be 5000. When a connection is closed, the port used by the client
+        is set in this state for a timeout period.
+    - In registry editor, under key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters, add two values:
+        - Name "MaxUserPort", Type DWORD, Data 65534 in decimal
+        - Name "TcpTimedWaitDelay", Type DWORD, Data 30 in decimal
+        - To revert this change, delete the two values.
+
+How to compile:
+    - After imported as Maven project in IntelliJ, select Build->Rebuild Project.
+
+How to run:
+    - Edit the desired parameters in Settings class.
+        - MPL: the MPL. Implemented as the size of the thread pool used to execute the transactions.
+        - ISOLATION_LEVEL: The isolation level desired for the experiment.
+            - Can be one of these:
+                Connection.TRANSACTION_SERIALIZABLE
+                Connection.TRANSACTION_REPEATABLE_READ (level 3)
+                Connection.TRANSACTION_READ_COMMITED (level 2)
+                Connection.TRANSACTION_UNCOMMITED (level 1)
+            - Cannot be Connection.TRANSACTION_NONE (level 0) as both MySQL and PostgreSQL does not support this level.
+        - DO_NOT_GROUP_DATA_OPERATIONS: set to true to disallow grouping data from same sensor into one transaction.
+                Otherwise data from same sensor in the same time slice (1440s) is grouped into one transaction.
+
+    - In test class TestDataLoaderPostgres, run testPreprocessInserts with the dataset URLs set.
+    - In test class TestDataLoaderPostgres, run testPostgresBenchmark to test on PostgreSQL.
+    - In test class TestDataLoaderMySQL, run testMySQLBenchmark to test on MySQL.
+
+How to interpret the results:
+    Performance metrics are constantly updated in terminal.
+        - Average Delay means the average delay between a transaction is submitted to the threadpool and its finishing time.
+            - This includes the time it waits in the queue.
+        - Average Operation Response Time means the average time each operation in each transaction takes.

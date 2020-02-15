@@ -43,7 +43,6 @@ public class TestDataLoaderPostgres {
         System.out.println("Recreated Schemas and loaded Metadata.");
     }
 
-    @Test
     public void testParseTimestamp() {
         try{
             PostgresDataLoader.ParseTimestamp("2017-11-08 00:00:00");
@@ -68,10 +67,7 @@ public class TestDataLoaderPostgres {
     @Test
     public void testPostgresBenchmark() {
         try{
-            PostgresBenchmark pb = new PostgresBenchmark(
-                    "Resources/data/low_concurrency/observation_low_concurrency.sql",
-                    "Resources/data/low_concurrency/semantic_observation_low_concurrency.sql"
-            );
+            PostgresBenchmark pb = new PostgresBenchmark();
 
             Metric metric = pb.runPostgresBenchmark();
 
