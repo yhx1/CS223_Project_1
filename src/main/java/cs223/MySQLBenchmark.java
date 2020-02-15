@@ -24,6 +24,15 @@ public class MySQLBenchmark {
         this.semanticURL = semanticURL;
     }
 
+    public void convertQueriesToMySQL() {
+
+        for (int time = 0; time < 0.5 * 1728000 / Settings.TIME_UNIT_SECS; time++) {
+            
+        }
+
+    }
+
+
     public void runMySQLBenchmarkOnTick(ThreadPoolExecutor executor, int time, Metric metric) throws Exception {
         String storageFilenamePrefix = Settings.PREPROCESSED_DATA_URL + time + "_";
         int segmentNumber = 0;

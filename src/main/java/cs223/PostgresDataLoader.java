@@ -301,5 +301,10 @@ public class PostgresDataLoader {
 
     }
 
+    public static void loadQueries(String filename) {
+
+
+
+    }
 
 }
