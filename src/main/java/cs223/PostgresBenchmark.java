@@ -10,6 +10,8 @@ public class PostgresBenchmark {
     public final static String[] ObservationTableNames = {"thermometerobservation","wemoobservation","wifiapobservation"};
     public final static String[] SemanticTableNames = {"occupancy", "presence"};
 
+    public static TreeMap<Integer, HashMap<String, ArrayList<String>>> queryStatements = new TreeMap<Integer, HashMap<String, ArrayList<String>>>();
+
     public String observationURL, semanticURL;
 
     public PostgresBenchmark(String observationURL, String semanticURL) {
@@ -21,7 +23,12 @@ public class PostgresBenchmark {
         String storageFilenamePrefix = Settings.PREPROCESSED_DATA_URL + time + "_";
         int segmentNumber = 0;
         File storageFile = new File(storageFilenamePrefix + segmentNumber);
-        HashMap<String, ArrayList<String>> currentStatements = new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> currentStatements;
+        if (queryStatements.containsKey(time)) {
+            currentStatements = queryStatements.get(time);
+        } else {
+            currentStatements = new HashMap<String, ArrayList<String>>();
+        }
 
         // Read all segments of this time into one HashMap
         while (storageFile.exists()) {
@@ -51,9 +58,20 @@ public class PostgresBenchmark {
 
         while (currentInsertsIterator.hasNext()) {
             String sensorID = currentInsertsIterator.next();
-            long taskStartTime = System.currentTimeMillis();
-            PostgresTransactionTask task = new PostgresTransactionTask(currentStatements.get(sensorID), metric, false, taskStartTime);
-            executor.execute(task);
+            long taskStartTime;
+            if (sensorID.equals("Query")) {
+                for (int j = 0; j < currentStatements.get(sensorID).size(); j++) {
+                    taskStartTime = System.currentTimeMillis();
+                    ArrayList temp = new ArrayList<String>();
+                    temp.add(currentStatements.get(sensorID).get(j));
+                    PostgresTransactionTask task = new PostgresTransactionTask(temp, metric, true, taskStartTime);
+                    executor.execute(task);
+                }
+            } else {
+                taskStartTime = System.currentTimeMillis();
+                PostgresTransactionTask task = new PostgresTransactionTask(currentStatements.get(sensorID), metric, false, taskStartTime);
+                executor.execute(task);
+            }
         }
         metric.printMetrics(time);
     }
@@ -69,10 +87,7 @@ public class PostgresBenchmark {
             Thread.sleep(Settings.INTERVAL_BETWEEN_TIME_UNIT);
         }
 
-
         return metric;
     }
-
-
 
 }

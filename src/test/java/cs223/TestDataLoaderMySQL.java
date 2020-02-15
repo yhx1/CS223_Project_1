@@ -46,6 +46,7 @@ public class TestDataLoaderMySQL {
         try{
             PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/semantic_observation_high_concurrency.sql");
             PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/observation_high_concurrency.sql");
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

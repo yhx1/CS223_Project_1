@@ -35,7 +35,7 @@ public class MySQLTransactionTask implements Runnable {
 
             // For Queries
             if (readonly) {
-                con.setReadOnly(readonly);
+                //con.setReadOnly(readonly);
                 for (int i = 0; i < statements.size(); i++) {
                     long operationStartTime = System.currentTimeMillis();
                     Statement st = con.createStatement();

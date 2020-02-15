@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mysql/schema/create_mysql.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysql/schema/drop_mysql.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLDataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLTransactionTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/QueryParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MySQLBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MySQLTransactionTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/MySQLTransactionTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/PostgresBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderMySQL.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,11 +31,17 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1XS9891nfwW6gQQ70KaCtmjfT5K" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -47,7 +49,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -62,18 +64,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Noname\Desktop\CS223\Project_1\Resources\schema" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="JUnit.TestDataLoaderPostgres.testPostgresBenchmark">
     <configuration name="TestDataLoaderMySQL.testCreateSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -196,5 +186,31 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/Project_1" />
     </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom" timestamp="1581735022561">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1581735022561" />
+    <state width="1493" height="166" key="GridCell.Tab.0.center" timestamp="1581735022560">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="166" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1581735022560" />
+    <state width="1493" height="166" key="GridCell.Tab.0.left" timestamp="1581735022560">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="166" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1581735022560" />
+    <state width="1493" height="166" key="GridCell.Tab.0.right" timestamp="1581735022561">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1493" height="166" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1581735022561" />
+    <state x="277" y="60" key="SettingsEditor" timestamp="1581724544679">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="277" y="60" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1581724544679" />
+    <state x="465" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1581723859008">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="465" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1581723859008" />
   </component>
 </project>
