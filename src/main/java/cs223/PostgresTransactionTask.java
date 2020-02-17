@@ -68,7 +68,7 @@ public class PostgresTransactionTask implements Runnable {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             try {
                 if (!st.isClosed()) {
@@ -94,7 +94,7 @@ public class PostgresTransactionTask implements Runnable {
             }
             metric.semaphore.release();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }

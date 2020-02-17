@@ -69,7 +69,7 @@ public class MySQLTransactionTask implements Runnable {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             try {
                 if (con != null) {
@@ -94,7 +94,7 @@ public class MySQLTransactionTask implements Runnable {
             }
             metric.semaphore.release();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }

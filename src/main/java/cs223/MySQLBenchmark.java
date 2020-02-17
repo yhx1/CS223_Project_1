@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MySQLBenchmark {
 
@@ -151,24 +152,27 @@ public class MySQLBenchmark {
                 executor.execute(task);
             }
         }
-        metric.printMetrics(time);
+        //metric.printMetrics(time);
     }
 
     public Metric runMySQLBenchmark() throws Exception {
 
-        queryStatements = QueryParser.parseTime("Resources/queries/high_concurrency/queries.txt");
+        queryStatements = QueryParser.parseTime(Settings.QUERY_DATA_URL);
         convertQueriesToMySQL();
 
         Metric metric = new Metric();
 
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Settings.MPL);
 
-        for (int time = 0; time < 0.5 * 1728000 / Settings.TIME_UNIT_SECS; time++) {
+        for (int time = 0; time < Settings.TEST_RUNNING_TIME_SECS; time++) {
             runMySQLBenchmarkOnTick(executor, time, metric);
             Thread.sleep(Settings.INTERVAL_BETWEEN_TIME_UNIT);
         }
 
+        metric.printMetrics(Settings.TEST_RUNNING_TIME_SECS);
 
+        executor.shutdownNow();
+        Thread.sleep(1000);
         return metric;
     }
 

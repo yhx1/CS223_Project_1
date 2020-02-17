@@ -28,7 +28,7 @@ public class TestDataLoaderPostgres {
 
     public void testLoadMetadata() {
         try{
-            PostgresDataLoader.RunSQLByLine("Resources/data/high_concurrency/metadata.sql");
+            PostgresDataLoader.RunSQLByLine("Resources/data/low_concurrency/metadata.sql");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
@@ -56,8 +56,8 @@ public class TestDataLoaderPostgres {
     @Test
     public void testPreprocessInserts() {
         try{
-            PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/semantic_observation_high_concurrency.sql");
-            PostgresDataLoader.PreprocessInserts("Resources/data/high_concurrency/observation_high_concurrency.sql");
+            PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/semantic_observation_low_concurrency.sql");
+            PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/observation_low_concurrency.sql");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

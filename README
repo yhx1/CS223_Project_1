@@ -24,7 +24,7 @@ Optional Requirements:
 - Increase JVM maximum heap size to at least 10GB
     - In Windows, create an environment variable named "_JAVA_OPTIONS", with value "-Xmx10g".
     - At least 10GB is required to complete running the high concurrency dataset.
-        - By default we only run half of the dataset. If you wish to run the entire dataset you can edit the code in PostgresBenchmark&MySQLBenchmark class.
+        - By default we only run 1/4 of the dataset. If you wish to run the entire dataset you can edit the code in PostgresBenchmark&MySQLBenchmark class.
         - High memory usage comes from not enough throughput causing all incoming transactions to be placed on a queue.
         - Note that Observation can still be done without running the entire dataset.
 
@@ -41,21 +41,12 @@ How to compile:
     - After imported as Maven project in IntelliJ, select Build->Rebuild Project.
 
 How to run:
+    - Create an empty folder called "preprocessed" in the root folder. If this folder exists, delete all the contents in it.
     - Edit the desired parameters in Settings class.
-        - MPL: the MPL. Implemented as the size of the thread pool used to execute the transactions.
-        - ISOLATION_LEVEL: The isolation level desired for the experiment.
-            - Can be one of these:
-                Connection.TRANSACTION_SERIALIZABLE
-                Connection.TRANSACTION_REPEATABLE_READ (level 3)
-                Connection.TRANSACTION_READ_COMMITED (level 2)
-                Connection.TRANSACTION_UNCOMMITED (level 1)
-            - Cannot be Connection.TRANSACTION_NONE (level 0) as both MySQL and PostgreSQL does not support this level.
         - DO_NOT_GROUP_DATA_OPERATIONS: set to true to disallow grouping data from same sensor into one transaction.
                 Otherwise data from same sensor in the same time slice (1440s) is grouped into one transaction.
-
-    - In test class TestDataLoaderPostgres, run testPreprocessInserts with the dataset URLs set.
-    - In test class TestDataLoaderPostgres, run testPostgresBenchmark to test on PostgreSQL.
-    - In test class TestDataLoaderMySQL, run testMySQLBenchmark to test on MySQL.
+        - HIGH_CONCURRENCY: change to true if you want to run on high concurrency dataset.
+    - In class Benchmark, run function Main.
 
 How to interpret the results:
     Performance metrics are constantly updated in terminal.
