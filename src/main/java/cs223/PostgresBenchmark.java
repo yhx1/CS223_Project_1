@@ -21,12 +21,8 @@ public class PostgresBenchmark {
         int segmentNumber = 0;
         File storageFile = new File(storageFilenamePrefix + segmentNumber);
         HashMap<String, ArrayList<String>> currentStatements;
-        if (queryStatements.containsKey(time)) {
-            currentStatements = queryStatements.get(time);
 
-        } else {
-            currentStatements = new HashMap<String, ArrayList<String>>();
-        }
+        currentStatements = new HashMap<String, ArrayList<String>>();
 
         // Read all segments of this time into one HashMap
         while (storageFile.exists()) {
@@ -85,8 +81,6 @@ public class PostgresBenchmark {
     }
 
     public Metric runPostgresBenchmark() throws Exception {
-
-        queryStatements = QueryParser.parseTime(Settings.QUERY_DATA_URL);
 
         Metric metric = new Metric();
 

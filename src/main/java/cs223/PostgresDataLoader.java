@@ -17,18 +17,20 @@ public class PostgresDataLoader {
     public static String DB_PASSWORD = "cs223p1postgres";
 
 
-    public static void RunSQLByFile(String filename) throws Exception {
+    public static void RunSQLByFile(String filename, String URL, String user, String password) throws Exception {
         String filepath = filename;
         String content = new String(Files.readAllBytes(Paths.get(filepath)));
         //System.out.println(content);
 
-        Connection con = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
+        Connection con = DriverManager.getConnection(URL, user, password);
         Statement st = con.createStatement();
         st.executeUpdate(content);
+        st.close();
+        con.close();
     }
 
-    public static void RunSQLByLine(String filename) throws Exception {
-        Connection con = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
+    public static void RunSQLByLine(String filename, String URL, String user, String password) throws Exception {
+        Connection con = DriverManager.getConnection(URL, user, password);
 
         BufferedReader reader;
 
@@ -41,8 +43,10 @@ public class PostgresDataLoader {
             Statement st = con.createStatement();
             st.executeUpdate(line);
             line = reader.readLine();
+            st.close();
         }
 
+        con.close();
     }
 
     public static int ParseTimestamp(String timestamp) {
@@ -74,63 +78,6 @@ public class PostgresDataLoader {
         }
         return false;
     }
-
-    /*
-    public static String[] PreprocessLine(String TableName, String line) {
-        if (line.length() < 6) {
-            return new String[]{};
-        }
-        if (!(line.substring(0,6).equalsIgnoreCase("INSERT"))){
-            //System.out.println("Not an insert: "+line);
-            return new String[]{};
-        }
-        Pattern p2 = Pattern.compile("\\(");
-        String[] tempString = p2.split(line);
-        Pattern p3 = Pattern.compile(",");
-        String[] tempString2 = p3.split(tempString[1].substring(0, tempString[1].length()-2));
-        for (int i=0; i<tempString2.length; i++) {
-            tempString2[i] = tempString2[i].trim().substring(1,tempString2[i].length()-1);
-        }
-        String TimeStamp, Sensor;
-        switch(TableName) {
-            case "thermometerobservation": {
-                TimeStamp = tempString2[2];
-                Sensor = tempString2[3];
-                //System.out.println("THERMO TimeStamp: " + TimeStamp + " Sensor: " + Sensor);
-                break;
-            }
-            case "wemoobservation": {
-                TimeStamp = tempString2[3];
-                Sensor = tempString2[4];
-                //System.out.println("WEMO TimeStamp: " + TimeStamp + " Sensor: " + Sensor);
-                break;
-            }
-            case "wifiapobservation":
-                TimeStamp = tempString2[2];
-                Sensor = tempString2[3];
-                //System.out.println("WIFIAP TimeStamp: " + TimeStamp + " Sensor: " + Sensor);
-                break;
-            case "occupancy": {
-                TimeStamp = tempString2[3];
-                Sensor = tempString2[4];
-                //System.out.println("OCCUPANCY TimeStamp: " + TimeStamp + " Sensor: " + Sensor);
-                break;
-            }
-            case "presence": {
-                TimeStamp = tempString2[3];
-                Sensor = tempString2[4];
-                //System.out.println("PRESENCE TimeStamp: " + TimeStamp + " Sensor: " + Sensor);
-                break;
-            }
-            default: {
-                TimeStamp = "";
-                Sensor = "";
-                break;
-            }
-        }
-        return new String[]{TimeStamp, Sensor};
-    }
-    */
 
     public static void PreprocessInserts(String filename) throws Exception {
 

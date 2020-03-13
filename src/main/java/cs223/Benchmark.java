@@ -15,19 +15,9 @@ public class Benchmark {
 
     public static void postgresCleanUp() {
         try{
-            PostgresDataLoader.RunSQLByLine("Resources/schema/drop.sql");
-            PostgresDataLoader.RunSQLByFile("Resources/schema/create.sql");
-            PostgresDataLoader.RunSQLByLine(Settings.METADATA_DATASET_URL);
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
-    }
-
-    public static void mysqlCleanUp() {
-        try{
-            MySQLDataLoader.RunSQLByLine("mysql/schema/drop_mysql.sql", false);
-            MySQLDataLoader.RunSQLByLine("mysql/schema/create_mysql.sql", true);
-            MySQLDataLoader.RunSQLByLine(Settings.METADATA_DATASET_URL, true );
+            PostgresDataLoader.RunSQLByLine("Resources/schema/drop.sql", PostgresDataLoader.DB_URL, PostgresDataLoader.DB_USER, PostgresDataLoader.DB_PASSWORD);
+            PostgresDataLoader.RunSQLByFile("Resources/schema/create.sql", PostgresDataLoader.DB_URL, PostgresDataLoader.DB_USER, PostgresDataLoader.DB_PASSWORD);
+            PostgresDataLoader.RunSQLByLine(Settings.METADATA_DATASET_URL, PostgresDataLoader.DB_URL, PostgresDataLoader.DB_USER, PostgresDataLoader.DB_PASSWORD);
         } catch (Exception e) {
             //e.printStackTrace();
         }
@@ -49,22 +39,6 @@ public class Benchmark {
             }
 
         }
-
-        for (int i = 0; i < MPLs.size(); i++) {
-            Settings.MPL = MPLs.get(i);
-
-            for (int j = 0; j < Levels.size(); j++) {
-                Settings.ISOLATION_LEVEL = Levels.get(j);
-
-                System.out.println("MPL: "+ Settings.MPL + " Level: "+ Settings.ISOLATION_LEVEL);
-
-                mysqlCleanUp();
-                MySQLBenchmark mb = new MySQLBenchmark();
-                mb.runMySQLBenchmark();
-            }
-
-        }
-
 
 
     }
