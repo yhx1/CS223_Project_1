@@ -9,24 +9,31 @@ import java.util.concurrent.Semaphore;
 
 public class CohortTask implements Runnable {
 
-    private MultiNodeEmulator nm;
+    private volatile MultiNodeEmulator nm;
     private int CohortNum;
     public BlockingQueue<EmulatedMessage> queue;
+    public Hashtable<String, Long> timeOfPrepare;
 
     private Map<String, List<String>> unprepared; // Tx ID to list of operations
     private Set<String> prepared; // Set of Tx IDs
 
-    private boolean BLOCK;
+    // Testing purpose
+    public CrashEmulation ce;
+
+    //private boolean BLOCK;
 
     public CohortTask(MultiNodeEmulator nm, int CohortNum, BlockingQueue<EmulatedMessage> queue) {
         this.nm = nm;
         this.CohortNum = CohortNum;
         this.queue = queue;
+        this.timeOfPrepare = nm.TransactionTimestamps.get(CohortNum);
+
+        this.ce = nm.CrashEmulationConfigs.get(CohortNum);
 
         unprepared = new HashMap<>();
         prepared = new HashSet<>();
 
-        BLOCK = false;
+        //BLOCK = false;
     }
 
     public void recovery() {
@@ -39,6 +46,11 @@ public class CohortTask implements Runnable {
 
             st = con.createStatement();
             ResultSet rs = st.executeQuery("select TxID from preparedTx where TxID NOT IN (SELECT TxID from completedTx);");
+            while (rs.next()) {
+                String TxID = rs.getString(1);
+                prepared.add(TxID);
+                timeOfPrepare.put(TxID, 0L);
+            }
 
             rs.close();
 
@@ -64,7 +76,7 @@ public class CohortTask implements Runnable {
     // Execute all operations in the unprepared map entry
     // Prepare transaction
     // Force write prepare log
-    public boolean prepare(String TxID) {
+    public boolean prepare(String TxID) throws Exception{
         int success = 1;
         Connection con = null;
         Statement st = null;
@@ -101,6 +113,14 @@ public class CohortTask implements Runnable {
             return false;
         }
 
+        // Set prepare timestamp
+        timeOfPrepare.put(TxID, System.currentTimeMillis());
+
+        // Crash if configured
+        if (ce.COHORT_CRASH_BEFORE_LOG_PREPARE) {
+            ce.CRASH_NOW = true;
+            throw new Exception("Crashed for testing purpose before prepare log is forced.");
+        }
 
         // Force write prepare log
         try {
@@ -241,6 +261,8 @@ public class CohortTask implements Runnable {
         // Check logs to find out which Txs are prepared but not completed.
         // put them into the prepared set.
 
+        System.out.println("Cohort "+ CohortNum + " started.");
+
         recovery();
 
         while (true) {
@@ -252,7 +274,7 @@ public class CohortTask implements Runnable {
                 continue;
             }
 
-            System.out.println("Cohort "+CohortNum+ " messaged received from "+em.sender+ " : operation "+em.op+ ", content "+em.content);
+            System.out.println("Cohort "+CohortNum+ " message received from "+em.sender+ " : operation "+em.op+ ", content "+em.content);
             try {
                 switch(em.op) {
                     case EmulatedMessage.OP_ECHO:
@@ -282,17 +304,47 @@ public class CohortTask implements Runnable {
                     {
                         String TxID = em.sender + "C" + CohortNum;
                         boolean success = prepare(TxID);
-                        if (success) {
-                            nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
-                                    EmulatedMessage.OP_VOTE_YES,
-                                    em.sender // Reply global transaction ID rather than the local one
-                            ));
-                        } else {
-                            nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
-                                    EmulatedMessage.OP_VOTE_NO,
-                                    em.sender // Reply global transaction ID rather than the local one
-                            ));
+
+                        // Crash for testing
+                        if (ce.COHORT_CRASH_BEFORE_VOTE) {
+                            ce.CRASH_NOW = true;
+                            throw new Exception("Crashed for testing purpose before voting.");
                         }
+
+                        if (success) {
+                            boolean putSuccess = false;
+                            while (!putSuccess) {
+                                try {
+                                    nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
+                                            EmulatedMessage.OP_VOTE_YES,
+                                            em.sender // Reply global transaction ID rather than the local one
+                                    ));
+                                    putSuccess = true;
+                                } catch (InterruptedException e) {
+                                    putSuccess = false;
+                                }
+                            }
+                        } else {
+                            boolean putSuccess = false;
+                            while (!putSuccess) {
+                                try {
+                                    nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
+                                            EmulatedMessage.OP_VOTE_NO,
+                                            em.sender // Reply global transaction ID rather than the local one
+                                    ));
+                                    putSuccess = true;
+                                } catch (InterruptedException e) {
+                                    putSuccess = false;
+                                }
+                            }
+                        }
+
+                        // Crash for testing
+                        if (ce.COHORT_CRASH_AFTER_VOTE) {
+                            ce.CRASH_NOW = true;
+                            throw new Exception("Crashed for testing purpose after voting.");
+                        }
+
                         break;
                     }
                     case EmulatedMessage.OP_COMMIT:
@@ -306,10 +358,20 @@ public class CohortTask implements Runnable {
                             break;
                         }
                         commit(TxID);
-                        nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
-                                EmulatedMessage.OP_ACK,
-                                em.content)); // Reply global transaction ID rather than the local one
+
+                        boolean success = false;
+                        while (!success) {
+                            try {
+                                nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
+                                        EmulatedMessage.OP_ACK,
+                                        em.content)); // Reply global transaction ID rather than the local one
+                                success = true;
+                            } catch (InterruptedException e) {
+                                success = false;
+                            }
+                        }
                         prepared.remove(TxID);
+                        timeOfPrepare.remove(TxID);
                         break;
                     }
                     case EmulatedMessage.OP_ABORT:
@@ -319,14 +381,18 @@ public class CohortTask implements Runnable {
                         // Ack
                     {
                         String TxID = em.content + "C" + CohortNum;
+                        /*
                         if (!prepared.contains(TxID)) {
                             break;
                         }
+
+                         */
                         abort(TxID);
                         nm.MessageQueues.get(0).put(new EmulatedMessage(Integer.toString(CohortNum),
                                 EmulatedMessage.OP_ACK,
                                 em.content)); // Reply global transaction ID rather than the local one
                         prepared.remove(TxID);
+                        timeOfPrepare.remove(TxID);
                         break;
                     }
                     default:
@@ -336,8 +402,10 @@ public class CohortTask implements Runnable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                if (ce.CRASH_NOW) {
+                    return;
+                }
             }
-
 
         }
     }

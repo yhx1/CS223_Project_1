@@ -2,35 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cohort_log_create.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cohort_log_drop.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coord_log_create.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coord_log_drop.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/create_mysql.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/drop_mysql.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project_2_create_db.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CohortTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorClientReceiverTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorMessageHandlerTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorTestTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/EmulatedMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/MultiNodeEmulator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/PreparedTransaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/PreparedTransactionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cs223/TestBasic2PC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CohortTimeoutCheckingTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorTimeoutCheckingTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CrashEmulation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Hasher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Project2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql/schema/create_mysql.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql/schema/drop_mysql.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Benchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MySQLBenchmark.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MySQLDataLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MySQLTransactionTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/PostgresBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/PostgresDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/PostgresDataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/QueryParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Project1Benchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CohortTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CohortTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorClientReceiverTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorClientReceiverTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorMessageHandlerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorMessageHandlerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MultiNodeEmulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/MultiNodeEmulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderMySQL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestBasic2PC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/Test2PC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,8 +74,21 @@
       <recent name="C:\Users\Noname\Desktop\CS223\Project_1\mysql\schema" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestBasic2PC.test2PCMultiCohort">
-    <configuration name="TestBasic2PC.cleanUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Project2">
+    <configuration name="Project2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs223.Project2" />
+      <module name="Project_2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs223.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test2PC.testAtomicityCohortDownAfterVoteNoAndRecovery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_2" />
       <extension name="coverage">
         <pattern>
@@ -99,14 +97,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestBasic2PC" />
-      <option name="METHOD_NAME" value="cleanUp" />
+      <option name="MAIN_CLASS_NAME" value="cs223.Test2PC" />
+      <option name="METHOD_NAME" value="testAtomicityCohortDownAfterVoteNoAndRecovery" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestBasic2PC.test2PCMultiCohort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Test2PC.testAtomicityCohortDownAfterVoteYesAndRecovery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_2" />
       <extension name="coverage">
         <pattern>
@@ -115,14 +113,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestBasic2PC" />
-      <option name="METHOD_NAME" value="test2PCMultiCohort" />
+      <option name="MAIN_CLASS_NAME" value="cs223.Test2PC" />
+      <option name="METHOD_NAME" value="testAtomicityCohortDownAfterVoteYesAndRecovery" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestBasic2PC.test2PCSingleCohort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Test2PC.testAtomicityCoordinatorDownAfterAbort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_2" />
       <extension name="coverage">
         <pattern>
@@ -131,14 +129,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestBasic2PC" />
-      <option name="METHOD_NAME" value="test2PCSingleCohort" />
+      <option name="MAIN_CLASS_NAME" value="cs223.Test2PC" />
+      <option name="METHOD_NAME" value="testAtomicityCoordinatorDownAfterAbort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestBasic2PC.testCreateSchema" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Test2PC.testAtomicityCoordinatorDownAfterCommit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_2" />
       <extension name="coverage">
         <pattern>
@@ -147,24 +145,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestBasic2PC" />
-      <option name="METHOD_NAME" value="testCreateSchema" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDataLoaderPostgres.testPreprocessInserts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Project_2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs223.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs223" />
-      <option name="MAIN_CLASS_NAME" value="cs223.TestDataLoaderPostgres" />
-      <option name="METHOD_NAME" value="testPreprocessInserts" />
+      <option name="MAIN_CLASS_NAME" value="cs223.Test2PC" />
+      <option name="METHOD_NAME" value="testAtomicityCoordinatorDownAfterCommit" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestBasic2PC.test2PCMultiCohort" />
-        <item itemvalue="JUnit.TestBasic2PC.cleanUp" />
-        <item itemvalue="JUnit.TestBasic2PC.test2PCSingleCohort" />
-        <item itemvalue="JUnit.TestBasic2PC.testCreateSchema" />
-        <item itemvalue="JUnit.TestDataLoaderPostgres.testPreprocessInserts" />
+        <item itemvalue="Application.Project2" />
+        <item itemvalue="JUnit.Test2PC.testAtomicityCoordinatorDownAfterAbort" />
+        <item itemvalue="JUnit.Test2PC.testAtomicityCoordinatorDownAfterCommit" />
+        <item itemvalue="JUnit.Test2PC.testAtomicityCohortDownAfterVoteNoAndRecovery" />
+        <item itemvalue="JUnit.Test2PC.testAtomicityCohortDownAfterVoteYesAndRecovery" />
       </list>
     </recent_temporary>
   </component>
@@ -232,22 +214,22 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1583632876676" />
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom" timestamp="1584133661200">
+    <state width="1493" height="278" key="GridCell.Tab.0.bottom" timestamp="1584254549182">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584133661200" />
-    <state width="1493" height="217" key="GridCell.Tab.0.center" timestamp="1584133661200">
+    <state width="1493" height="278" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
+    <state width="1493" height="278" key="GridCell.Tab.0.center" timestamp="1584254549182">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1584133661200" />
-    <state width="1493" height="217" key="GridCell.Tab.0.left" timestamp="1584133661199">
+    <state width="1493" height="278" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
+    <state width="1493" height="278" key="GridCell.Tab.0.left" timestamp="1584254549182">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1584133661199" />
-    <state width="1493" height="217" key="GridCell.Tab.0.right" timestamp="1584133661200">
+    <state width="1493" height="278" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
+    <state width="1493" height="278" key="GridCell.Tab.0.right" timestamp="1584254549182">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1584133661200" />
+    <state width="1493" height="278" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
     <state width="1493" height="265" key="GridCell.Tab.1.bottom" timestamp="1581915559165">
       <screen x="0" y="0" width="1536" height="834" />
     </state>

@@ -37,7 +37,7 @@ public class TestDataLoaderPostgres {
         }
     }
 
-    @Test
+    //@Test
     public void cleanUp() {
         testDropSchema();
         testCreateSchema();
@@ -45,34 +45,11 @@ public class TestDataLoaderPostgres {
         System.out.println("Recreated Schemas and loaded Metadata.");
     }
 
-    public void testParseTimestamp() {
-        try{
-            PostgresDataLoader.ParseTimestamp("2017-11-08 00:00:00");
-            PostgresDataLoader.ParseTimestamp("2017-11-27 23:57:59");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
     @Test
     public void testPreprocessInserts() {
         try{
             PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/semantic_observation_low_concurrency.sql");
             PostgresDataLoader.PreprocessInserts("Resources/data/low_concurrency/observation_low_concurrency.sql");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void testPostgresBenchmark() {
-        try{
-            PostgresBenchmark pb = new PostgresBenchmark();
-
-            Metric metric = pb.runPostgresBenchmark();
-
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();

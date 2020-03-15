@@ -58,6 +58,16 @@ public class CoordinatorClientReceiverTask implements Runnable {
             for (int i: pt.operations.keySet()) {
                 participatingCohorts = participatingCohorts + Integer.toString(i) + " ";
             }
+
+            boolean acquired = false;
+            while (!acquired) {
+                try {
+                    nm.CONCURRENT_TRANSACTION_LOCK.acquire();
+                    acquired = true;
+                } catch (InterruptedException e) {
+                    acquired = false;
+                }
+            }
             try {
                 nm.MessageQueues.get(0).put(new EmulatedMessage(
                         pt.id,

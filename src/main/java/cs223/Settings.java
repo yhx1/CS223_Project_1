@@ -34,6 +34,14 @@ public class Settings {
     public static String P2_DB_USER = "cs223p2";
     public static String P2_DB_PASSWORD = "cs223p2";
 
+    public static int P2_PREPARE_TIMEOUT_MILLISECOND = 1000;
+    public static int P2_DECISION_TIMEOUT_MILISECOND = 2000;
+    public static int P2_ACK_TIMEOUT_MILISECOND = 1000;
+
+    public static final int VOTE_IN_PROGRESS = 0;
+    public static final int VOTE_ABORT = 1;
+    public static final int VOTE_COMMIT = 2;
+
 
     public static void switch_to_high_concurrency() {
         SEMANTIC_DATASET_URL = "Resources/data/high_concurrency/semantic_observation_high_concurrency.sql";

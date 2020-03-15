@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Benchmark {
+public class Project1Benchmark {
 
     public static List<Integer> MPLs = new ArrayList<Integer>(Arrays.asList(2,5,10,20,50));
     public static List<Integer> Levels = new ArrayList<>(Arrays.asList(Connection.TRANSACTION_READ_UNCOMMITTED,
@@ -43,6 +43,7 @@ public class Benchmark {
 
     }
 
+    /*
     public static void main(final String[] args) throws Exception{
         if (Settings.HIGH_CONCURRENCY) {
             Settings.switch_to_high_concurrency();
@@ -51,5 +52,5 @@ public class Benchmark {
         PostgresDataLoader.PreprocessInserts(Settings.OBSERVATION_DATASET_URL);
         runBenchmarks();
     }
-
+    */
 }

@@ -1,4 +1,5 @@
-UCI CS223 Winter 2020 Project 1
+UCI CS223 Winter 2020 Project 2
+Distributed Transactions with Two-Phase Commit Protocol
 
 Author:
 - Yiheng Xu (yihengx1@uci.edu)
@@ -11,11 +12,9 @@ You may try other ways to compile, test and run this program, but only methods u
 Requirements:
 - Install PostgreSQL for Windows.
     - Port should be set as 5432.
-    - Create a database called "testdb" with all privileges granted to user "postgres" with password "cs223papostgres".
-
-- Install MySQL for Windows.
-    - Post should be set as 3306.
-    - Create a database called "testdb" with all privileges granted to user "cs223p1" with password "cs223p1".
+    - Using the superuser, create a new user named "cs223p2" with password "cs223p2";
+    - Using the superuser, execute the script in project_2_create_db.sql to create all the necessary databases.
+        - Only 3 cohorts are supported by default. To allow more cohorts, edit the code in Settings.java and add lines to setup their databases in this file.
 
 - Import the project as a Maven project in IntelliJ IDEA.
 - Install Java JDK with version >= 8.
@@ -24,32 +23,49 @@ Optional Requirements:
 - Increase JVM maximum heap size to at least 10GB
     - In Windows, create an environment variable named "_JAVA_OPTIONS", with value "-Xmx10g".
     - At least 10GB is required to complete running the high concurrency dataset.
-        - By default we only run 1/4 of the dataset. If you wish to run the entire dataset you can edit the code in PostgresBenchmark&MySQLBenchmark class.
+        - We have only tested running the dataset for 5 minutes.
         - High memory usage comes from not enough throughput causing all incoming transactions to be placed on a queue.
         - Note that Observation can still be done without running the entire dataset.
-
-- Increase maximum user ports of Windows OS
-    - This is required if you run with each INSERT as a transaction, and when your machine allows high throughput.
-    - Windows OS by default limits the number of TIMED_WAIT ports to be 5000. When a connection is closed, the port used by the client
-        is set in this state for a timeout period.
-    - In registry editor, under key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters, add two values:
-        - Name "MaxUserPort", Type DWORD, Data 65534 in decimal
-        - Name "TcpTimedWaitDelay", Type DWORD, Data 30 in decimal
-        - To revert this change, delete the two values.
 
 How to compile:
     - After imported as Maven project in IntelliJ, select Build->Rebuild Project.
 
-How to run:
+How to run with given dataset:
     - Create an empty folder called "preprocessed" in the root folder. If this folder exists, delete all the contents in it.
-    - Edit the desired parameters in Settings class.
-        - DO_NOT_GROUP_DATA_OPERATIONS: set to true to disallow grouping data from same sensor into one transaction.
-                Otherwise data from same sensor in the same time slice (1440s) is grouped into one transaction.
-        - HIGH_CONCURRENCY: change to true if you want to run on high concurrency dataset.
+    - In test folder, class Test2PC, run test testCreateSchema (you have to uncomment the preceding @Test first)
     - In class Benchmark, run function Main.
+        - By default, high concurrency dataset is used.
+            - If you want to change this behavior, edit Settings.java and change HIGH_CONCURRENCY to false.
+                - Note that the throughput is low enough, it won't make a difference.
+
+How to test in case of different failures:
+    - Note that you cannot test using forcing the program to close, restart, etc.
+        - This project emulates each node using a set of threads. Shared variables to each emulated node is cleared before "recovery" (which is,
+            respawning the thread) to simulate an environment of "distributed system".
+            - Therefore testing must be done by coding. The testing codes inserts "breakpoints" in each thread and control them precisely when to fail.
+    - In test folder, run the following tests. Note that you must have already created the schema using the above method.
+        - test2PCSingleCohort: tests when there is only 1 cohort.
+        - test2PCMultiCohortWithAbort: tests the case when there are 3 cohorts, with some transaction aborted.
+        - testAtomicityCohortDownBeforePrepareLog: tests when a cohort crashes before forcing prepare log to disk.
+        - testAtomicityCohortDownBeforeVote: tests when a cohort crashes before sending the vote.
+        - testAtomicityCohortDownAfterVoteYesAndRecovery: tests when a cohort crashes after sending Yes vote and recovers later.
+        - testAtomicityCohortDownAfterVoteNoAndRecovery: tests when a cohort crashes after sending No vote and recovers later.
+        - testAtomicityCoordinatorDownAfterCommit: tests when the coordinator crashes after sending COMMIT to part of cohorts, and recovers later.
+        - testAtomicityCoordinatorDownAfterAbort: tests when the coordinator crashes after sending ABORT to part of cohorts, and recovers later.
 
 How to interpret the results:
-    Performance metrics are constantly updated in terminal.
-        - Average Delay means the average delay between a transaction is submitted to the threadpool and its finishing time.
-            - This includes the time it waits in the queue.
-        - Average Operation Response Time means the average time each operation in each transaction takes.
+    - Unlike in Project 1, there is no performance metric.
+        - This is because:
+            - emulated nodes using threads share host machine resources;
+            - use very fast message passing (Java concurrent library) rather than network;
+            - throughput is very low
+          so performance metrics make no sense.
+    - For the dataset, read the console output. You can also check the database for inserted data.
+        - The program is coded so that only when current transaction is completed, the next can start execution.
+            - Therefore as long as new transaction are being executed, all previous transactions are completed (commited/aborted).
+        - Console output contains all the messages sent between coordinator and the cohorts.
+    - For failure cases, read the console output.
+        - Each case is allowed 30 seconds.
+        - Console output contains all the messages sent between coordinator and the cohorts.
+        - Read to check all transactions are eventually ACKed by all cohorts/cohorts polls coordinator status for completion.
+
