@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b235573-0f48-4db1-8f87-73f2a26a11e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CohortTimeoutCheckingTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorTimeoutCheckingTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/CrashEmulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Hasher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs223/Project2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Project1Benchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CohortTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CohortTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorClientReceiverTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorClientReceiverTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorMessageHandlerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/CoordinatorMessageHandlerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/MultiNodeEmulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/MultiNodeEmulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestBasic2PC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/Test2PC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cs223/TestDataLoaderPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs223/Project2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs223/Project2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,22 +201,22 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1583632876676" />
-    <state width="1493" height="278" key="GridCell.Tab.0.bottom" timestamp="1584254549182">
+    <state width="1493" height="278" key="GridCell.Tab.0.bottom" timestamp="1584305309023">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="278" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
-    <state width="1493" height="278" key="GridCell.Tab.0.center" timestamp="1584254549182">
+    <state width="1493" height="278" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1584305309023" />
+    <state width="1493" height="278" key="GridCell.Tab.0.center" timestamp="1584305309023">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="278" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
-    <state width="1493" height="278" key="GridCell.Tab.0.left" timestamp="1584254549182">
+    <state width="1493" height="278" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1584305309023" />
+    <state width="1493" height="278" key="GridCell.Tab.0.left" timestamp="1584305309021">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="278" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
-    <state width="1493" height="278" key="GridCell.Tab.0.right" timestamp="1584254549182">
+    <state width="1493" height="278" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1584305309021" />
+    <state width="1493" height="278" key="GridCell.Tab.0.right" timestamp="1584305309023">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="278" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1584254549182" />
+    <state width="1493" height="278" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1584305309023" />
     <state width="1493" height="265" key="GridCell.Tab.1.bottom" timestamp="1581915559165">
       <screen x="0" y="0" width="1536" height="834" />
     </state>

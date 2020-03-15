@@ -218,7 +218,7 @@ public class Project2 {
         if (Settings.HIGH_CONCURRENCY) {
             Settings.switch_to_high_concurrency();
         }
-        //PostgresDataLoader.PreprocessInserts(Settings.OBSERVATION_DATASET_URL);
+        PostgresDataLoader.PreprocessInserts(Settings.OBSERVATION_DATASET_URL);
 
         cleanUp();
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(12);
